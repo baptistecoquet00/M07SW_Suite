@@ -16,9 +16,31 @@ create table utilisateur(
     primary key(idutilisateur)
 );
 
+create table drone(
+    iddrone int not null,
+    marque varchar(45),
+    modele varchar(45),
+    refDrone varchar(45),
+    dateAchat timestamp,
+    primary key(iddrone)
+);
+
+
+create table vol(
+    idvol int not null,
+    idutilisateur int not null,
+    dateVol timestamp,
+    iddrone int not null,
+    primary key(idvol),
+    constraint fk_idutilisateur foreign key(idutilisateur)
+    references utilisateur(idutilisateur),
+    constraint fk_iddrone foreign key(iddrone)
+    references drone(iddrone) 
+);
+
 create table etat(
     idetat int not null,
-    idvol int,
+    idvol int not null,
     pitch float,
     roll float,
     yaw float,
@@ -35,8 +57,8 @@ create table etat(
     agx float,
     agy float,
     agz float,
-    primary key(idetat)
-    
+    primary key(idetat),
+    constraint fk_idvol foreign key(idvol) references vol(idvol)    
 );
 
 create table commande(
@@ -46,27 +68,9 @@ create table commande(
     valeur varchar(11),
     time_ms int,
     primary key(idcommande),
-    constraint fk_ideat foreign key(idetat) references etat(idetat),
+    constraint fk_idetat foreign key(idetat) references etat(idetat),
     constraint fk_listeCommande foreign key (idlisteCommande) 
     references listeCommande(idlistCommande)
 );
 
-create table drone(
-    iddrone int not null,
-    marque varchar(45),
-    modele varchar(45),
-    refDrone varchar(45),
-    dateAchat timestamp,
-    primary key(iddrone)
-);
 
-create table vol(
-    idvol int not null,
-    idutilisateur int not null,
-    dateVol timestamp,
-    iddrone int not null,
-    constraint fk_idutilisateur foreign key(idutilisateur)
-    references utilisateur(idutilisateur),
-    constraint fk_iddrone foreign key(iddrone)
-    references drone(iddrone) 
-);
