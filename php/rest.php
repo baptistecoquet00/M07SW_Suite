@@ -163,6 +163,30 @@
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+        }elseif(isset($req_data[1]) && $req_data[1]=="utilisateur" && !isset($req_data[2])){
+            $req = "SELECT * FROM utilisateur";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array();
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            print_r(json_encode($reponse));
+        }elseif(isset($req_data[1]) && $req_data[1]=="drone" && !isset($req_data[2])){
+            $req = "SELECT * FROM drone";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array();
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            print_r(json_encode($reponse));
+        }elseif(isset($req_data[1]) && $req_data[1]=="vol" && !isset($req_data[2])){
+            $req = "SELECT * FROM vol";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array();
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            print_r(json_encode($reponse));
         }
     }
 ?>

@@ -21,7 +21,7 @@ function recupererNombreDrone(){
             console.log(reponse);
             iddrone = reponse[19];
             console.log(iddrone);
-            document.getElementById("nbdrone").innerHTML = iddrone;
+            document.getElementById("Mydrone").innerHTML = iddrone;
         }
     };
     xhttp.open("GET", "http://172.20.21.212/~ba/M07/php/rest.php/nbdrone");
@@ -57,3 +57,19 @@ function recupererNombreUtilisateur(){
     xhttp.open("GET", "http://172.20.21.212/~ba/M07/php/rest.php/nbutilisateur");
     xhttp.send(); 
 } 
+
+function recupererDonneesDrones(){
+    let reponseAPI=JSON.parse(this.responseText);
+    var table="<div ><table class='tableau_statistique '><tr class='centrer'><th>Numéro drône</th><th>Marque</th><th>Modèle</th><th>Référence</th><th>Date achat</th><th>Action</th></tr>";
+    for(let i=0;i<reponseAPI.valeur.length;i++){
+        table+="<tr class='centrer'>";
+        let donneesVol=reponseAPI.valeur[i];
+        table+="<td>"+donneesVol.idvol+"</td>";
+        table+="<td>"+donneesVol.dateVol+"</td>";
+        table+="<td>"+donneesVol.iddrone+"</td>";
+        table+="<td>"+donneesVol.nom+"</td>";
+        table+="</tr>";
+    }
+    table+="</table></div>";
+    document.getElementById("section").innerHTML=table;
+}
