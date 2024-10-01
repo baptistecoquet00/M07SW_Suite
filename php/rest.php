@@ -17,22 +17,14 @@
     print_r($donneesVolAssoc);
 
     // Récupérer l'états de vol du drone
-    $Etatvol = $donneesVolAssoc['etats'][0];
+    //$Etatvol = $donneesVolAssoc['etats'][0];
     
     //print_r($Etatvol);
    
    
 
     
-    // convertion du temps au format date
-    $time = $donneesVolAssoc['time'];
-    $date = date('Y-m-d H:i:s',$time);
-    //echo $date."\n";
-    
-
-    $NomVol = $donneesVolAssoc['nom'];
-    $refDrone = $donneesVolAssoc['numero'];
-
+   
 
     // Récuperation du chemin 
     $req_path = $_SERVER['PATH_INFO'];
@@ -45,6 +37,15 @@
     }
 
     if ($req_typ == 'POST'){
+         // convertion du temps au format date
+        $time = $donneesVolAssoc['time'];
+        $date = date('Y-m-d H:i:s',$time);
+        //echo $date."\n";
+    
+
+        $NomVol = $donneesVolAssoc['nom'];
+        $refDrone = $donneesVolAssoc['numero'];
+
         if(isset($NomVol)){
             $req = "SELECT idutilisateur FROM utilisateur WHERE nom = ?";
             $reqpreparer = $maconnexion->prepare($req);
@@ -120,7 +121,7 @@
             $reqpreparer = $maconnexion->prepare($req);
             /////////////////////////////////////////
             $tableauDeDonnees=array($idvol);
-            echo "Nombre d'états recu : " . count($donneesVolAssoc['etats']);
+            //echo "Nombre d'états recu : " . count($donneesVolAssoc['etats']);
 
             for ($i = 0; $i < count($donneesVolAssoc['etats']) ; $i++){
                 foreach ($donneesVolAssoc['etats'][$i] as $v) {

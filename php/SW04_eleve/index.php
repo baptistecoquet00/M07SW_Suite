@@ -25,14 +25,16 @@
 
     <nav id="barre_navigation">
         <div id="nav_presentation">Présentation</div>
-        <div id="nav_suivi">Suivi</div>
+        <div id="nav_suivi" onclick ="suiviAjax()">Suivi</div>
         <div  id="nav_connexion">Connexion</div>
     	<div  id="nav_inscription" >Inscription</div>
 
       <div></div>
     </nav>
 
-	
+	<section>
+    
+  </section>
   <footer id="mon_footer">
     <div>
         <h1>Les drones :</h1>
@@ -54,6 +56,7 @@
     <script src="JS/mesFonctions.js"></script>
     <script src="JS/dark_light.js"></script>
     <script src="JS/navigation.js"></script>
+    <script src="JS/ajax.js"></script>
 
   </body>
 </html>
