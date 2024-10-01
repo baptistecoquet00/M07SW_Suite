@@ -73,3 +73,6 @@ function recupererDonneesDrones(){
     table+="</table></div>";
     document.getElementById("section").innerHTML=table;
 }
+
+function recupererDonneesVols() {}
+function recupererDonneesUtilisateur(){}
