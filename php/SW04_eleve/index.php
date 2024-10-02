@@ -32,7 +32,7 @@
       <div></div>
     </nav>
 
-	<section>
+	<section id="section">
     
   </section>
   <footer id="mon_footer">
@@ -47,7 +47,7 @@
       </div>
       <div>
         <h1>A propos :</h1>
-        <a href="../00_LeCV/index.html" alt="Mon CV">Consulter mon CV</a>
+        <a href="https://www.theboldclub.com/" alt="Mon CV">Consulter mon CV</a>
         <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">Tout sur les Grid CSS</a>
       </div>
     </footer>

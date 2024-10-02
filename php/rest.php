@@ -187,6 +187,18 @@
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+        }elseif(isset($req_data[1]) && $req_data[1]=="graphe"){
+            if(isset($req_data[2])  && $req_data[1]=="graphe"){
+                if(isset($req_data[3]) && $ $req_data[3]= "h" && $req_data[1]=="graphe" ){
+                    $req = "SELECT h FROM etat where idvol = ?";
+                    $reqpreparer = $maconnexion->prepare($req);
+                    $tableauDeDonnees=array($req_data[2]);
+                    $reqpreparer->execute($tableauDeDonnees);
+                    $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
+                    $reqpreparer->closeCursor();
+                }
+            }
         }
+
     }
 ?>
