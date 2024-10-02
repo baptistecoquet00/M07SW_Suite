@@ -47,6 +47,7 @@
         $refDrone = $donneesVolAssoc['numero'];
 
         if(isset($NomVol)){
+            
             $req = "SELECT idutilisateur FROM utilisateur WHERE nom = ?";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array($NomVol);
@@ -77,6 +78,7 @@
             $reqpreparer->execute($tableauDeDonnees);
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
+            
             if(!empty($reponse))
             {
                 $iddrone = $reponse[0]['iddrone'];
@@ -140,30 +142,37 @@
     }
     elseif($req_typ == "GET"){
         if(isset($req_data[1]) && $req_data[1]=='nbdrone' && !isset($req_data[2])){
-            $req = "SELECT count(iddrone) from drone";
+           
+            $req = "SELECT count(iddrone) as nbdrone from drone ";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array();
             $reqpreparer->execute($tableauDeDonnees);
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+
         }elseif(isset($req_data[1]) && $req_data[1]=='nbvol' && !isset($req_data[2])){
-            $req = "SELECT count(idvol) from vol";
+           
+            $req = "SELECT count(idvol) as nbvol from vol";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array();
             $reqpreparer->execute($tableauDeDonnees);
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+
         }elseif(isset($req_data[1]) && $req_data[1]=='nbutilisateur' && !isset($req_data[2])){
-            $req = "SELECT count(idutilisateur) from utilisateur";
+           
+            $req = "SELECT count(idutilisateur) as nbutilisateur from utilisateur ";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array();
             $reqpreparer->execute($tableauDeDonnees);
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+
         }elseif(isset($req_data[1]) && $req_data[1]=="utilisateur" && !isset($req_data[2])){
+            
             $req = "SELECT * FROM utilisateur";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array();
@@ -171,7 +180,9 @@
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+
         }elseif(isset($req_data[1]) && $req_data[1]=="drone" && !isset($req_data[2])){
+            
             $req = "SELECT * FROM drone";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array();
@@ -179,23 +190,29 @@
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
             print_r(json_encode($reponse));
+
         }elseif(isset($req_data[1]) && $req_data[1]=="vol" && !isset($req_data[2])){
+            
             $req = "SELECT * FROM vol";
             $reqpreparer = $maconnexion->prepare($req);
             $tableauDeDonnees=array();
             $reqpreparer->execute($tableauDeDonnees);
             $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
             $reqpreparer->closeCursor();
+            
             print_r(json_encode($reponse));
         }elseif(isset($req_data[1]) && $req_data[1]=="graphe"){
             if(isset($req_data[2])  && $req_data[1]=="graphe"){
-                if(isset($req_data[3]) && $ $req_data[3]= "h" && $req_data[1]=="graphe" ){
+                if(isset($req_data[3]) &&  $req_data[3]== "h" && $req_data[1]=="graphe" ){
+            
                     $req = "SELECT h FROM etat where idvol = ?";
                     $reqpreparer = $maconnexion->prepare($req);
                     $tableauDeDonnees=array($req_data[2]);
                     $reqpreparer->execute($tableauDeDonnees);
                     $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
                     $reqpreparer->closeCursor();
+                    print_r(json_encode($reponse));
+            
                 }
             }
         }

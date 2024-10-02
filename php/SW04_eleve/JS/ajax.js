@@ -1,3 +1,5 @@
+//require('chart.js');
+
 function suiviAjax(){
     console.debug("Plan ! ");
     const xhttp = new XMLHttpRequest();
@@ -20,9 +22,9 @@ function recupererNombreDrone(){
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200){
             const reponse=this.responseText;
-            nbdrone = JSON.parse(reponse);
-            console.log(reponse);
-            iddrone = reponse[19];
+            rep = JSON.parse(reponse);
+            console.log(rep);
+            iddrone = rep[0].nbdrone;
             console.log(iddrone);
             document.getElementById("Mydrone").innerHTML = iddrone;
         }
@@ -35,9 +37,9 @@ function recupererNombreVol(){
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200){
             const reponse=this.responseText;
-            nbvol = JSON.parse(reponse);
+            rep = JSON.parse(reponse);
             console.log(reponse);
-            idvol= reponse[17] + reponse[18];
+            idvol= rep[0].nbvol;
             console.log(idvol);
             document.getElementById("fly").innerHTML = idvol;
         }
@@ -50,9 +52,8 @@ function recupererNombreUtilisateur(){
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200){
             const reponse=this.responseText;
-            Listecapteur = JSON.parse(reponse);
-            console.log(reponse);
-            idutilisateur = reponse[25]+reponse[26];
+            rep = JSON.parse(reponse);
+            idutilisateur = rep[0].nbutilisateur;
             console.log(idutilisateur);
             document.getElementById("man").innerHTML = idutilisateur;
         }
@@ -110,6 +111,7 @@ function recupererDonneesVols(){
     xhttp.send();
 
 }
+
 function recupererDonneesUtilisateur(){
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -128,6 +130,7 @@ function recupererDonneesUtilisateur(){
         table+="<td>"+donneesVol.pseudo+"</td>";
         table+="<td>"+donneesVol.mdp+"</td>";
         table+="</tr>";
+        let button = "<button id='date-idvol'>Graphe</button>";
     }
     table+="</table></div>";
     document.getElementById("section").innerHTML=table;
@@ -137,3 +140,50 @@ function recupererDonneesUtilisateur(){
     xhttp.send();
 
 }
+
+
+function recupererDonneesHauteurVol(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        let reponseAPI=JSON.parse(this.responseText);
+        console.log(reponseAPI);
+     }
+    }
+    xhttp.open("GET", "http://172.20.21.212/~ba/M07/php/rest.php/graphe/1/h");
+    xhttp.send();
+}
+
+function ajaxGraph(a,b) {
+    const ctx = document.getElementById('monGraphe');
+    new Chart(ctx, {
+     type: 'line',
+     data: {
+        labels: a,
+        datasets: [{ label: legende1,
+            data: y1,
+            yAxisID:'y1',
+            borderColor: color1,
+            borderWidth: 1
+            },
+            {
+            label: legende2,
+            data: y2,
+            yAxisID:'y2',
+            borderColor: color2,
+            borderWidth: 1
+            }]
+            },
+    options: {scales:{y1:{type: 'linear',display:true,position:'left'},y2:
+            {type: 'linear',display:true,position:'right'}}},
+            
+    });
+    let a=[];let b=[];
+    for (let i = 0; i < 100; i++){
+        a[i]=i;
+        b[i]=10*i;
+    }    
+}
+    
+    //ajaxGraph(x,y);
+    
