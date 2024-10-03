@@ -205,7 +205,7 @@
             if(isset($req_data[2])  && $req_data[1]=="graphe"){
                 if(isset($req_data[3]) &&  $req_data[3]== "h" && $req_data[1]=="graphe" ){
             
-                    $req = "SELECT h FROM etat where idvol = ?";
+                    $req = "SELECT idetat,h , idvol FROM etat where idvol = ?";
                     $reqpreparer = $maconnexion->prepare($req);
                     $tableauDeDonnees=array($req_data[2]);
                     $reqpreparer->execute($tableauDeDonnees);

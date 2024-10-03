@@ -57,6 +57,7 @@
     <script src="JS/dark_light.js"></script>
     <script src="JS/navigation.js"></script>
     <script src="JS/ajax.js"></script>
+    <script src="JS/chart.js"></script>
 
   </body>
 </html>
