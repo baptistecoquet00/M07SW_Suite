@@ -97,6 +97,7 @@ function recupererDonneesDrones(){
                 table+="<td>"+donneesVol.modele+"</td>";
                 table+="<td>"+donneesVol.refDrone+"</td>";
                 table+="<td>"+donneesVol.dateAchat+"</td>";
+                table += "<td><button>Mettre à jour</button></td>";
                 table+="</tr>";
             }
             table+="</table></div>";
@@ -163,7 +164,7 @@ function recupererDonneesUtilisateur(){
                 table+="<td>"+donneesVol.naissance+"</td>";
                 table+="<td>"+donneesVol.pseudo+"</td>";
                 table+="<td>"+donneesVol.mdp+"</td>";
-                
+                table += "<td><button>Mettre à jour</button></td>";
                 table+="</tr>";  
             }
             table+="</table></div>";
