@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./CSS/ossature_grid.css">
     <link rel="stylesheet" type="text/css" href="./CSS/design.css">
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/trajectoire.css" >
 
 
   </head>
@@ -26,10 +27,9 @@
     <nav id="barre_navigation">
         <div id="nav_presentation">Présentation</div>
         <div id="nav_suivi" onclick ="suiviAjax()">Suivi</div>
+        <div id="nav_trajectoire" onclick="affichertrajectoire()">Trajectoire</div>
         <div  id="nav_connexion">Connexion</div>
-    	<div  id="nav_inscription" >Inscription</div>
-
-      <div></div>
+    	  <div  id="nav_inscription" >Inscription</div>  
     </nav>
 
 	<section id="section">
@@ -58,6 +58,7 @@
     <script src="JS/navigation.js"></script>
     <script src="JS/ajax.js"></script>
     <script src="JS/chart.js"></script>
+    <script src="JS/trajectoire.js"></script>
 
   </body>
 </html>

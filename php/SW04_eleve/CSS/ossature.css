@@ -5,7 +5,7 @@ body {
 	grid-template-rows:	80px auto minmax(400px, auto) 60px;
 	grid-template-areas: 	"h h"
 							"n n"
-							"s a"
+							"s s"
 							"f f";
 /*	grid-column-gap: 1px;
 	grid-row-gap: 1px;*/
@@ -31,7 +31,9 @@ aside {
 section {
 	grid-area: s;
 }
-
+aside{
+	display: none;
+}
 
 /* Responsive: pour les écrans dont la largeur est inférieure à 800 px */
 @media (max-width: 800px) {

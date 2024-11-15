@@ -45,7 +45,7 @@
 
         $NomVol = $donneesVolAssoc['nom'];
         $refDrone = $donneesVolAssoc['numero'];
-
+        
         if(isset($NomVol)){
             
             $req = "SELECT idutilisateur FROM utilisateur WHERE nom = ?";
@@ -111,7 +111,7 @@
                 $reqpreparer = $maconnexion->prepare($req);
                 $tableauDeDonnees=array($idutilisateur,$date,$iddrone);               
                 $reqpreparer->execute($tableauDeDonnees);
-                $idvol= $maconnexion->lastInsertId();
+                $idutilisateur= $maconnexion->lastInsertId();
             }
             print_r($idvol);
 
@@ -138,6 +138,35 @@
             
             //
             //////////////////////////////// 
+        }
+        if(isset($req_data[1]) && $req_data[1]=='trajectoire' && !isset($req_data[2])){
+            $TitreTrajectoire = $donneesVolAssoc['titre'];
+            $CommandTrajectoire = $donneesVolAssoc['trajectoire'];
+            
+            if(isset($TitreTrajectoire)){
+                $req = "SELECT * FROM listeTrajectoire where titre = ?";
+                $reqpreparer = $maconnexion->prepare($req);
+                $tableauDeDonnees=array($TitreTrajectoire);
+                $reponse=$reqpreparer->fetchAll(PDO::FETCH_ASSOC);
+                $reqpreparer->closeCursor();
+                print_r(json_encode($reponse));
+                if(empty($reponse)){
+                    
+                    $req = "INSERT INTO listeTrajectoire(titre) values (?)";
+                    $reqpreparer = $maconnexion->prepare($req);
+                    $tableauDeDonnees=array($TitreTrajectoire);
+                    $reqpreparer->execute($tableauDeDonnees);
+                    $idlisttrajectoire= $maconnexion->lastInsertId();
+
+                    $req = "INSERT INTO trajectoire(idlistetrajectoire,commande) values (?,?)";
+                    $reqpreparer = $maconnexion->prepare($req);
+                    $tableauDeDonnees=array($idlisttrajectoire);
+                    for($j = 0;$j<count($CommandTrajectoire);$j++){
+                        $tableauDeDonnees[1] = $CommandTrajectoire[$j]["commande"];
+                        $reqpreparer->execute($tableauDeDonnees);
+                    }
+                }
+            }
         }
     }
     elseif($req_typ == "GET"){
@@ -209,13 +238,46 @@
                     $reqpreparer = $maconnexion->prepare($req);
                     $tableauDeDonnees=array($req_data[2]);
                     $reqpreparer->execute($tableauDeDonnees);
-                    $reponse=$reqpreparer ->fetchAll(PDO::FETCH_ASSOC);
+                    $reponse=$reqpreparer->fetchAll(PDO::FETCH_ASSOC);
                     $reqpreparer->closeCursor();
                     print_r(json_encode($reponse));
             
                 }
             }
+        }elseif(isset($req_data[1]) && $req_data[1]=='trajectoire' && !isset($req_data[2])){
+            $req = "SELECT idlistetrajectoire,titre FROM listeTrajectoire";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array();
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            print_r(json_encode($reponse));
+            
+        }elseif(isset($req_data[1]) && $req_data[1]=='trajectoire' && isset($req_data[2])){
+            $req = "SELECT idlistetrajectoire,titre FROM listeTrajectoire where idlistetrajectoire = ?";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array($req_data[2]);
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            print_r(json_encode($reponse));
         }
-
+    }
+    elseif($req_typ == "DELETE"){
+        if(isset($req_data[1]) && $req_data[1]=='trajectoire' && isset($req_data[2])){
+            $req = "DELETE FROM trajectoire where idlistetrajectoire = ?";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array($req_data[2]);
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            $req = "DELETE FROM listeTrajectoire where idlistetrajectoire = ?";
+            $reqpreparer = $maconnexion->prepare($req);
+            $tableauDeDonnees=array($req_data[2]);
+            $reqpreparer->execute($tableauDeDonnees);
+            $reponse=$reqpreparer->fetchAll(PDO::FETCH_ASSOC);
+            $reqpreparer->closeCursor();
+            print_r(json_encode($reponse));
+        }
     }
 ?>

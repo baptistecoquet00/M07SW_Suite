@@ -19,6 +19,10 @@ section {
 	grid-area: section;
 }
 
+aside{
+	display: none;
+}
+
 
 
 body {
@@ -29,7 +33,7 @@ body {
 	grid-template-rows:	80px 40px minmax(400px, auto) auto;
 	grid-template-areas: 	"header header"
 							"nav nav"
-							"section aside"
+							"section section"
 							"footer footer";
 	grid-column-gap: 0px;
 	/*grid-row-gap: 1px;*/

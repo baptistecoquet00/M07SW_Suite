@@ -1,0 +1,62 @@
+div#grille_trajectoire{
+    display: grid;
+    grid-template-columns: 1100px 1fr;
+}
+
+canvas#canvas_trajectoire{
+    border: 1px solid red;
+    width: 1100px;
+    height: 800px;
+}
+
+div#button{
+    display: flex;
+    flex: none;
+    background-color: var(--hf-bg-color);
+    color: var(--n-text-color);
+}  
+
+div#create{
+    text-align: center;
+    flex: auto;
+    flex-direction: row;
+}
+
+div#charge{
+    text-align: center;
+    flex: auto;
+    flex-direction: row;
+}
+
+div#create:hover{
+    text-decoration:underline;
+}
+
+div#charge:hover{
+    text-decoration:underline; 
+}
+
+div#FormTrajectoire{
+    text-align: center;
+}
+
+input{
+    display:block; 
+    margin:auto;
+}
+
+div#afficher_commande{
+    margin:auto;
+    border: 1px solid rgb(0, 0, 0);
+    width: 400px;
+    min-height: 200px;
+}
+
+div div .change{
+    font-size: 20px;
+    color: var(--n-text-color);
+    margin: 0px 0px;
+    padding: 0 10px;
+	font-variant-caps: small-caps;
+    text-decoration: none;
+}

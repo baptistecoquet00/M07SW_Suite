@@ -1,11 +1,11 @@
 
-create table listeCommande(
+create table if not exists listeCommande(
     idlistCommande int not null, 
     nom varchar(45),
     primary key(idlistCommande)
 );
 
-create table utilisateur(
+create table if not exists utilisateur(
     idutilisateur int not null,
     nom varchar(45),
     prenom varchar(45),
@@ -16,7 +16,7 @@ create table utilisateur(
     primary key(idutilisateur)
 );
 
-create table drone(
+create table if not exists drone(
     iddrone int not null,
     marque varchar(45),
     modele varchar(45),
@@ -26,7 +26,7 @@ create table drone(
 );
 
 
-create table vol(
+create table if not exists vol(
     idvol int not null,
     idutilisateur int not null,
     dateVol timestamp,
@@ -38,7 +38,7 @@ create table vol(
     references drone(iddrone) 
 );
 
-create table etat(
+create table if not exists etat(
     idetat int not null,
     idvol int not null,
     pitch float,
@@ -61,7 +61,7 @@ create table etat(
     constraint fk_idvol foreign key(idvol) references vol(idvol)    
 );
 
-create table commande(
+create table if not exists commande(
     idcommande int not null,
     idetat int not null,
     idlisteCommande int not null,
@@ -71,6 +71,21 @@ create table commande(
     constraint fk_idetat foreign key(idetat) references etat(idetat),
     constraint fk_listeCommande foreign key (idlisteCommande) 
     references listeCommande(idlistCommande)
+);
+
+create table if not exists listeTrajectoire(
+    idlistetrajectoire int not null auto_increment,
+    titre varchar(45),
+    type varchar(45),
+    constraint fk_listetrajectoire primary key(idlistetrajectoire)
+);
+
+create table if not exists trajectoire(
+    idtrajectoire int not null auto_increment,
+    idlistetrajectoire int not null,
+    commande varchar(45),
+    primary key(idtrajectoire),
+    constraint fk_listetrajectoire foreign key(idlistetrajectoire) references listeTrajectoire(idlistetrajectoire)
 );
 
 
